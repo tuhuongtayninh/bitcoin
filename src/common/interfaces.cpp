@@ -7,6 +7,8 @@
 
 #include <boost/signals2/connection.hpp>
 #include <memory>
+#include <utility>#include <boost/signals2/connection.hpp>
+#include <memory>
 #include <utility>
 
 namespace common {
@@ -48,6 +50,8 @@ std::unique_ptr<Handler> MakeSignalHandler(boost::signals2::connection connectio
 {
     return std::make_unique<common::SignalHandler>(std::move(connection));
 }
-
+{
+    return std::make_unique<common::CleanupHandler>(std::move(cleanup));
+}
 std::unique_ptr<Echo> MakeEcho() { return std::make_unique<common::EchoImpl>(); }
 } // namespace interfaces
