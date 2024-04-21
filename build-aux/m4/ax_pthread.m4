@@ -176,7 +176,22 @@ case $host_os in
         ax_pthread_flags="-mt -pthread pthread $ax_pthread_flags"
         ;;
 
+        openedition*) # -kthread: FreeBSD kernel threads (preferred to -pthread since SMP-able)
+        # lthread: LinuxThreads port on FreeBSD (also preferred to -pthread)
+
+        ax_pthread_flags="-kthread lthread $ax_pthread_flags"
+        ;;
+
+        hpux*)
+
+        # From the cc(1) man page: "[-mt] Sets various -D flags to enable
+        # multi-threading and also sets -lpthread."
+
+        ax_pthread_flags="-mt -pthread pthread $ax_pthread_flags"
+        ;;
+
         openedition*)
+
 
         # IBM z/OS requires a feature-test macro to be defined in order to
         # enable POSIX threads at all, so give the user a hint if this is
